@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Rock, Paper, Scissors Game
+	</title>
+	<style>
+		input[type="button"]{
+			background-color:chartreuse;
+			font-size:18pt;
+		}
+	</style>
+	<style>
+		body{
+			background-color:lightblue;
+			padding:30px;
+			font-size:18pt;
+		}
+	</style>
+	<script>
+		var p1Choice;
+		var p2Choice;
+		function rock1(){
+			p1Choice="rock";
+		}
+		function paper1(){
+			p1Choice="paper";
+		}
+		function scissors1(){
+			p1Choice="scissors";
+		}
+		function rock2(){
+			p2Choice="rock";
+			compareResults();
+		}
+		function paper2(){
+			p2Choice="paper";
+			compareResults();
+		}
+		function scissors2(){
+			p2Choice="scissors";
+			compareResults();
+		}
+		function compareResults(){
+			var gameResult;
+			gameResult="Player 1 chose "+p1Choice+" and "+"Player 2 chose "+p2Choice;
+			if (p1Choice=="rock" && p2Choice=="rock"){
+				gameResult+=" so it is a tie.";
+			}
+			else if (p1Choice=="rock" && p2Choice=="paper"){
+				gameResult+=" so Player 2 wins.";
+			}
+			else if (p1Choice=="rock" && p2Choice=="scissors"){
+				gameResult+=" so Player 1 wins.";
+			}
+			else if (p1Choice=="paper" && p2Choice=="rock"){
+				gameResult+=" so Player 1 wins.";
+			}
+			else if (p1Choice=="paper" && p2Choice=="paper"){
+				gameResult+=" so it is a tie.";
+			}
+			else if (p1Choice=="paper" && p2Choice=="scissors"){
+				gameResult+=" so Player 2 wins.";
+			}
+			else if (p1Choice=="scissors" && p2Choice=="rock"){
+				gameResult+=" so Player 2 wins.";
+			}
+			else if (p1Choice=="scissors" && p2Choice=="paper"){
+				gameResult+=" so Player 1 wins.";
+			}
+			else if (p1Choice=="scissors" && p2Choice=="scissors"){
+				gameResult+=" so it is a tie.";
+			}
+			else {
+				gameResult+=" so something is wrong and we don't know who wins.";
+			}
+			alert(gameResult);
+		}
+	</script>
+</head>
+<body>
+	<a href="index.html" style="font-size:18pt;padding:0px;color:black;">Home</a><br/>
+	<p>Player 1: Hide the webpage from Player 2 and choose from the buttons below</p>
+	<input type="button" value="Rock" onclick="rock1();"/>
+	<input type="button" value="Paper" onclick="paper1();"/>
+	<input type="button" value="Scissors" onclick="scissors1();"/>
+	<br/>
+	<br/>
+	<br/>
+	<p>Player 2: When it is your turn, choose from the buttons below</p>
+	<input style="background-color:orange;" type="button" value="Rock" onclick="rock2();"/>
+	<input style="background-color:orange;" type="button" value="Paper" onclick="paper2();"/>
+	<input style="background-color:orange;" type="button" value="Scissors" onclick="scissors2();"/>
+</body>
+</html>
