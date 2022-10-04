@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		To-do List App
+	</title>
+	<style>
+		input[type="button"]{
+			background-color:pink;
+		}
+		.header{
+			background-color:lightblue;
+			color:black;
+			height:100px;
+			font-size:36pt;
+			text-align:center;
+		}
+		.pad{
+			padding:25px;
+		}
+		.main-text{
+			background-color:lime;
+			font-size:20pt;
+		}
+	</style>
+	<script>
+		function addItem(){
+			var newItem=document.createElement("div");
+			newItem.innerHTML=document.getElementById("box").value;
+			newItem.onclick=removeItem;
+			document.getElementById("list").appendChild(newItem);
+			saveList();
+		}
+		function removeItem(){
+			document.getElementById("list").removeChild(this);
+			saveList();
+		}
+		function saveList(){
+			localStorage.storedList=document.getElementById("list").innerHTML;
+		}
+		function loadList(){
+			document.getElementById("list").innerHTML=localStorage.storedList;
+			for(var i=0;i<list.children.length;i++){
+				list.children[i].onclick=removeItem;
+			}
+		}
+	</script>
+	
+</head>
+<body class="main-text">
+	<a href="index.html" style="background-color:lightblue; font-size:18pt;padding:0px;color:black;">Home</a><br/>
+	<div class="header pad">
+	<img src="VolkovLogo.jpg" alt="Black Wolf" style="height:80px;"/>
+	The House of Volkov
+	</div>
+	<p>Special Exhibition To-Do List</p>
+	<input type="text" id="box" value="Type here to add task" style="font-size:20pt;"/>
+	<br/>
+	<input type="button" value="Add item" onclick="addItem();" style="font-size:20pt;"/>
+	<br/>
+	<div id="list"></div>
+	<script>
+		if(localStorage.storedList){
+			loadList();
+		}
+	</script>
+</body>
+</html>
