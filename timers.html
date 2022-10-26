@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Timers
+	</title>
+	<script>
+		var count=0;
+		function updateCount(){
+			document.getElementById("submitNumber").disabled = true;
+			var number=document.getElementById("numberBox");
+			var numberText=number.value;
+			count=count+parseInt(numberText);
+			document.getElementById("number").innerHTML=count;
+			setTimeout(updateCount, 1000);
+		}	
+	</script>
+	<style>
+		body{
+			padding:30px;
+			font-size:18pt;
+		}
+	</style>
+</head>
+<body>
+	<a href="index.html" style="font-size:18pt;padding:0px;color:black;">Home</a><br/>
+	<p>Please enter the number you want to count by.</p>
+	<input id="numberBox" type="text"/>
+	<input id="submitNumber" type="button" value="click here to start counting" style="font-size:20pt;padding:0px" onclick="updateCount();"/>
+	<div id="number" style="text-align:center;font-size:80pt;">
+		
+	</div>
+</body>
+</html>
