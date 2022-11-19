@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Calculator
+	</title>
+	<style>
+		body{
+			background-color:chartreuse;
+			font-size:18pt;
+		}
+		input[type="button"]{
+			background-color:orange;
+			font-size:20pt;
+		}
+	</style>
+	<script>
+		var answer;
+		var firstOperand;
+		var secondOperand;
+		var operation;
+		function submitFirstOperand(){
+			var firstNumber=document.getElementById("firstOperand");
+			firstOperand=parseInt(firstNumber.value);
+		}
+		function submitSecondOperand(){
+			var secondNumber=document.getElementById("secondOperand");
+			secondOperand=parseInt(secondNumber.value);
+		}
+		function addition(){
+			operation="add";
+		}
+		function subtraction(){
+			operation="subtract";
+		}
+		function multiplication(){
+			operation="multiply";
+		}
+		function division(){
+			operation="divide";
+		}
+		function getResult(){
+			if (operation=="add"){
+				answer=firstOperand+secondOperand;
+			}	
+			else if (operation=="subtract"){
+				answer=firstOperand-secondOperand;
+			}
+			else if (operation=="multiply"){
+				answer=firstOperand*secondOperand;
+			}
+			else if (operation=="divide"){
+				answer=firstOperand/secondOperand;
+			}
+			else {
+				answer="Operation error. Please try again.";
+			}
+			document.getElementById("answer").innerHTML=answer;
+		}
+	</script>
+</head>
+<body>
+	<a href="index.html" style="padding:0px;color:black;">Home</a><br/>
+	<p style="font-size:24pt;">Welcome to my calculator.</p>
+	<p>Please enter the first operand:</p>
+	<input id="firstOperand" type="text"/>
+	<input id="submitOperand1" type="button" value="Submit" onclick="submitFirstOperand();"/>
+	<p>Please choose the operator:</p>
+	<input type="button" value=" + " onclick="addition();"/>
+	<input type="button" value=" - " onclick="subtraction();"/>
+	<input type="button" value=" * " onclick="multiplication();"/>
+	<input type="button" value=" / " onclick="division();"/>
+	<p>Please enter the second operand:</p>
+	<input id="secondOperand" type="text"/>
+	<input id="submitOperand2" type="button" value="Submit" onclick="submitSecondOperand();"/>
+	<p>Please press the equals sign:</p>
+	<input type="button" value=" = " onclick="getResult();"/>
+	<p>
+		When you click on the equals sign, your answer is here:
+	</p>
+	<p id="answer">
+	
+	</p>
+</body>
+</html>
