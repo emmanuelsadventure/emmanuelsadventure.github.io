@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Connect 4
+	</title>
+	<style>
+		.row div{
+			padding:10px;
+			border:15px solid navy;
+			height:25px;
+			width:25px;
+			float:left;
+		}
+		.row{
+			clear:both;
+		}
+		.columnbutton{
+			width:70px;
+			height:40px;
+			
+		}
+	</style>
+</head>
+<body>
+	<a href="index.html" style="font-size:18pt;padding:0px;color:black;">Home</a><br/>
+	<p style="font-size:20pt;">Click to play Connect 4.</p>
+	<div>
+	<input class="columnbutton" type="button" value="Col1" onclick="placeTile(0);"/>
+	<input class="columnbutton" type="button" value="Col2" onclick="placeTile(1);"/>
+	<input class="columnbutton" type="button" value="Col3" onclick="placeTile(2);"/>
+	<input class="columnbutton" type="button" value="Col4" onclick="placeTile(3);"/>
+	<input class="columnbutton" type="button" value="Col5" onclick="placeTile(4);"/>
+	<input class="columnbutton" type="button" value="Col6" onclick="placeTile(5);"/>
+	<input class="columnbutton" type="button" value="Col7" onclick="placeTile(6);"/>
+	</div>
+	<div>
+		<div class="row">
+			<div onclick="place(this)" style="font-size:0pt" id="0_0">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="1_0">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="2_0">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="3_0">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="4_0">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="5_0">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="6_0">
+			</div>
+		</div>
+		<div class="row">
+			<div onclick="place(this)" style="font-size:0pt" id="0_1">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="1_1">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="2_1">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="3_1">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="4_1">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="5_1">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="6_1">
+			</div>
+		</div>
+		<div class="row">
+			<div onclick="place(this)" style="font-size:0pt" id="0_2">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="1_2">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="2_2">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="3_2">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="4_2">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="5_2">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="6_2">
+			</div>
+		</div>
+		<div class="row">
+			<div onclick="place(this)" style="font-size:0pt" id="0_3">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="1_3">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="2_3">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="3_3">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="4_3">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="5_3">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="6_3">
+			</div>
+		</div>
+		<div class="row">
+			<div onclick="place(this)" style="font-size:0pt" id="0_4">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="1_4">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="2_4">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="3_4">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="4_4">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="5_4">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="6_4">
+			</div>
+		</div>
+		<div class="row">
+			<div onclick="place(this)" style="font-size:0pt" id="0_5">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="1_5">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="2_5">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="3_5">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="4_5">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="5_5">
+			</div>
+			<div onclick="place(this)" style="font-size:0pt" id="6_5">
+			</div>
+		</div>
+	</div>
+	<script>
+		var currentPlayer="O";
+		function placeTile(col){
+			if(document.getElementById(col+"_5").innerText ==""){
+				document.getElementById(col+"_5").innerText=currentPlayer;
+				if(currentPlayer=="O"){
+					document.getElementById(col+"_5").style.color="red";
+					document.getElementById(col+"_5").style.backgroundColor="red";
+				}
+				else{
+					document.getElementById(col+"_5").style.color="yellow";
+					document.getElementById(col+"_5").style.backgroundColor="yellow";
+				}
+			}
+			else if(document.getElementById(col+"_4").innerText ==""){
+				document.getElementById(col+"_4").innerText=currentPlayer;
+				if(currentPlayer=="O"){
+					document.getElementById(col+"_4").style.color="red";
+					document.getElementById(col+"_4").style.backgroundColor="red";
+				}
+				else{
+					document.getElementById(col+"_4").style.color="yellow";
+					document.getElementById(col+"_4").style.backgroundColor="yellow";
+				}
+			}
+			else if(document.getElementById(col+"_3").innerText ==""){
+				document.getElementById(col+"_3").innerText=currentPlayer;
+				if(currentPlayer=="O"){
+					document.getElementById(col+"_3").style.color="red";
+					document.getElementById(col+"_3").style.backgroundColor="red";
+				}
+				else{
+					document.getElementById(col+"_3").style.color="yellow";
+					document.getElementById(col+"_3").style.backgroundColor="yellow";
+				}
+			}
+			else if(document.getElementById(col+"_2").innerText ==""){
+				document.getElementById(col+"_2").innerText=currentPlayer;
+				if(currentPlayer=="O"){
+					document.getElementById(col+"_2").style.color="red";
+					document.getElementById(col+"_2").style.backgroundColor="red";
+				}
+				else{
+					document.getElementById(col+"_2").style.color="yellow";
+					document.getElementById(col+"_2").style.backgroundColor="yellow";
+				}
+			}
+			else if(document.getElementById(col+"_1").innerText ==""){
+				document.getElementById(col+"_1").innerText=currentPlayer;
+				if(currentPlayer=="O"){
+					document.getElementById(col+"_1").style.color="red";
+					document.getElementById(col+"_1").style.backgroundColor="red";
+				}
+				else{
+					document.getElementById(col+"_1").style.color="yellow";
+					document.getElementById(col+"_1").style.backgroundColor="yellow";
+				}
+			}
+			else if(document.getElementById(col+"_0").innerText ==""){
+				document.getElementById(col+"_0").innerText=currentPlayer;
+				if(currentPlayer=="O"){
+					document.getElementById(col+"_0").style.color="red";
+					document.getElementById(col+"_0").style.backgroundColor="red";
+				}
+				else{
+					document.getElementById(col+"_0").style.color="yellow";
+					document.getElementById(col+"_0").style.backgroundColor="yellow";
+				}
+			}
+			else{
+				return;
+			}
+			currentPlayer=="O"?currentPlayer="X":currentPlayer="O";
+		}
+	</script>
+</body>
+</html>
