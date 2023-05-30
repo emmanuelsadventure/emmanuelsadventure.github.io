@@ -6,9 +6,11 @@
 	</title>
 </head>
 <body>
-	<canvas id="canvas" width="1024" height="1024"></canvas>
+	<a href="index.html" style="font-size:18pt;padding:0px;color:black;">Home</a><br/>
+	<canvas id="canvas" width="1024" height="621"></canvas>
+	<div id="winner" style="font-size: 30pt;"></div>
 	<script>
-		var board=[
+		var board0=[
 		"   ############################",
 		"            #        #  #     #",
 		"#  ####  #  #######  #  #  #  #",
@@ -39,24 +41,364 @@
 		"#              #  #  #        #",
 		"#  #  #  #######  #  #  #  ####",
 		"#  #  #                 #      ",
-		"############################  	"
+		"############################   "
 		];
-		var canvas = document.getElementById("canvas");
-		var ctx = canvas.getContext("2d");
-		var currentYoffset=0;
-		var squareSize=24;
-		board.forEach(function checkLine(line){
-			line=line.split("");
-			var currentXoffset=0;
-			line.forEach(function checkCharacter(character){
-				if(character=="#"){
-					ctx.fillStyle="black";
-					ctx.fillRect(currentXoffset,currentYoffset,squareSize,squareSize);
+		var board1=[
+		"   ############################",
+		"         #           #     #  #",
+		"#######  ##########  ####  #  #",
+		"#        #     #  #  #  #     #",
+		"####  #######  #  #  #  #  #  #",
+		"#  #                 #  #  #  #",
+		"#  #  ##########  ####  #  #  #",
+		"#  #  #  #     #  #        #  #",
+		"#  ####  ####  #  ####  #######",
+		"#  #     #  #     #  #  #     #",
+		"#  #  ####  #  ####  #  #  #  #",
+		"#              #  #     #  #  #",
+		"####  #  #######  #  #  ####  #",
+		"#     #  #     #     #        #",
+		"#  #######  ####  #######  #  #",
+		"#  #        #  #     #     #  #",
+		"#  ####  ####  #  #  #######  #",
+		"#                 #  #  #     #",
+		"#  ##########  #######  #######",
+		"#  #                          #",
+		"#  ####  ####  #  #  #  ####  #",
+		"#  #     #  #  #  #  #  #     #",
+		"#######  #  ##########  ####  #",
+		"#           #        #     #  #",
+		"#  #  ####  #  ####  #  #######",
+		"#  #     #  #  #  #           #",
+		"#  #############  ####  #  ####",
+		"#        #        #     #     #",
+		"####  ####  #  #  ####  #######",
+		"#     #     #  #               ",
+		"############################   "
+		];
+		var board2=[
+		"   ############################",
+	    "                     #        #",
+		"#  ####  #############  #  ####",
+		"#     #        #  #     #     #",
+		"#  #############  #  #  ####  #",
+		"#           #        #  #     #",
+		"#  ####  ##########  #  #  ####",
+		"#  #  #  #        #  #  #  #  #",
+		"#  #  ####  #######  #  #  #  #",
+		"#  #     #           #  #     #",
+		"#  ####  #  ####  ####  #######",
+		"#  #     #  #  #  #     #     #",
+		"#  #  #  #  #  #  #  #######  #",
+		"#     #        #  #  #  #     #",
+		"##########  #  #######  #  #  #",
+		"#  #  #     #  #           #  #",
+		"#  #  #  #  ####  ####  #  #  #",
+		"#        #  #        #  #  #  #",
+		"##########  #  ####  ##########",
+		"#  #     #     #     #        #",
+		"#  ####  ####  #  #  ####  ####",
+		"#     #  #  #  #  #        #  #",
+		"#  ####  #  #  ####  #######  #",
+		"#           #     #     #     #",
+		"####  #  #######  ##########  #",
+		"#     #     #        #        #",
+		"#######  #######  #######  #  #",
+		"#  #  #  #                 #  #",
+		"#  #  #  #  ####  ####  #  ####",
+		"#           #     #     #      ",
+		"############################   "
+		];
+		var board3=[
+		"   ############################",
+        "                        #     #",
+		"##########  ####  #######  #  #",
+		"#     #        #  #  #     #  #",
+		"#  ####  #######  #  #  ####  #",
+		"#  #     #              #  #  #",
+		"#  ####  ################  #  #",
+		"#     #  #  #     #     #     #",
+		"#  #  #  #  #  #  #  ####  #  #",
+		"#  #  #        #  #        #  #",
+		"####  ####  ####  ####  #######",
+		"#  #     #     #  #     #     #",
+		"#  ####  ####  ####  ####  #  #",
+		"#                 #  #     #  #",
+		"#  #######  ####  #  #######  #",
+		"#     #     #     #     #     #",
+		"#  ##########  #######  #  ####",
+		"#        #     #  #     #  #  #",
+		"####  ####  ####  #######  #  #",
+		"#     #  #           #        #",
+		"#  ####  #  ################  #",
+		"#        #     #  #     #     #",
+		"#  #  #######  #  ####  #  ####",
+		"#  #     #              #     #",
+		"#  #  #  #  #  ####  #######  #",
+		"#  #  #  #  #     #           #",
+		"#  ####  #  ####  #######  ####",
+		"#  #     #     #     #  #  #  #",
+		"#  #######  #  #######  #  #  #",
+		"#  #        #           #      ",
+		"############################   "
+		];
+		var board4=[
+		"   ############################",
+		"      #  #  #        #     #  #",
+		"#  ####  #  #  #######  #  #  #",
+		"#  #     #     #  #  #  #     #",
+		"#  ####  ####  #  #  #  #  ####",
+		"#        #     #        #  #  #",
+		"####  ####  ####  #  ####  #  #",
+		"#        #     #  #  #        #",
+		"####  #  #  #  #######  ####  #",
+		"#  #  #     #  #     #  #     #",
+		"#  #  ####  ####  #######  ####",
+		"#  #     #  #  #        #     #",
+		"#  #######  #  #  ##########  #",
+		"#              #     #        #",
+		"#  #############  ##########  #",
+		"#           #     #  #  #     #",
+		"#  ##########  #  #  #  #  ####",
+		"#        #     #     #  #     #",
+		"####  #  ####  #######  ####  #",
+		"#     #        #     #  #     #",
+		"#  ####  #  #######  #  #  ####",
+		"#     #  #  #  #        #     #",
+		"####  ####  #  ####  #  ####  #",
+		"#        #  #     #  #  #  #  #",
+		"##########  #  #######  #  #  #",
+		"#     #              #     #  #",
+		"####  ####  #  ##########  #  #",
+		"#        #  #     #  #  #     #",
+		"#  ##########  #  #  #  #  ####",
+		"#              #               ",
+		"############################   "
+		];
+		var board5=[
+		"   ############################",
+		"               #  #        #  #",
+		"#  ##########  #  #  #  ####  #",
+		"#        #  #  #  #  #  #     #",
+		"####  #  #  ####  #  ####  ####",
+		"#  #  #  #        #           #",
+		"#  #  ####  #  ####  #  #######",
+		"#     #     #  #  #  #  #     #",
+		"#  #######  ####  ####  #  ####",
+		"#  #                 #        #",
+		"#  ####  #######  ####  #######",
+		"#  #  #        #  #           #",
+		"#  #  ####  #############  ####",
+		"#     #        #  #     #  #  #",
+		"####  #  ####  #  #  ####  #  #",
+		"#  #        #              #  #",
+		"#  ####  ################  #  #",
+		"#              #     #        #",
+		"####  ##########  #######  ####",
+		"#  #        #  #              #",
+		"#  ####  #  #  ##########  ####",
+		"#  #     #  #                 #",
+		"#  ####  ####  #############  #",
+		"#  #  #  #        #        #  #",
+		"#  #  #  #  #  #  #  #  #  #  #",
+		"#        #  #  #     #  #  #  #",
+		"#  ####  #  #  #  #############",
+		"#     #  #  #  #     #        #",
+		"#  #  #  #  #  #  #######  ####",
+		"#  #  #  #  #  #               ",
+		"############################   "
+		];
+		var board6=[
+		"   ############################",
+		"            #  #  #     #     #",
+		"#  ####  #  #  #  #  ####  ####",
+		"#     #  #  #     #     #  #  #",
+		"#  ####  #  #  ####  ####  #  #",
+		"#     #  #  #  #        #     #",
+		"#  ####  #  #  ####  #  #  ####",
+		"#     #  #           #        #",
+		"#  #########################  #",
+		"#  #  #                 #  #  #",
+		"####  ####  #######  ####  #  #",
+		"#     #  #  #  #  #     #     #",
+		"####  #  ####  #  #  ####  ####",
+		"#        #           #        #",
+		"#######  #  #  ####  #  ####  #",
+		"#        #  #     #  #  #     #",
+		"#  #  #  #  ####  #######  ####",
+		"#  #  #     #  #        #     #",
+		"#  #  ####  #  #######  #  ####",
+		"#  #  #           #           #",
+		"#  ##########  #  #  ####  ####",
+		"#  #     #  #  #  #  #        #",
+		"#  ####  #  ####  ##########  #",
+		"#  #  #        #        #     #",
+		"#  #  #######  ##########  #  #",
+		"#     #  #     #     #     #  #",
+		"#######  ####  #  ####  #  ####",
+		"#  #     #  #        #  #     #",
+		"#  #  #  #  #  #  #  ####  ####",
+		"#     #        #  #            ",
+		"############################   "
+		];
+		var board7=[
+		"   ############################",
+		"   #           #              #",
+		"#  ####  ####  #######  #  #  #",
+		"#        #     #     #  #  #  #",
+		"#######  #######  #  ####  #  #",
+		"#        #        #        #  #",
+		"#  #############  #############",
+		"#                       #  #  #",
+		"#  #######  ####  #  ####  #  #",
+		"#  #     #     #  #     #     #",
+		"#  ####  #  #  ####  ####  ####",
+		"#     #  #  #  #     #     #  #",
+		"#  ####  #  ##########  ####  #",
+		"#        #        #        #  #",
+		"##########  ##########  ####  #",
+		"#     #           #           #",
+		"####  ####  ####  #######  ####",
+		"#     #        #     #  #     #",
+		"#  ####  #############  #  ####",
+		"#              #        #     #",
+		"#  ##########  #  #  #  #  #  #",
+		"#     #     #     #  #  #  #  #",
+		"#  ####  #  #  ##########  ####",
+		"#     #  #              #  #  #",
+		"#  ####  #  #######  #  #  #  #",
+		"#  #  #  #  #        #  #     #",
+		"#  #  ####  #  #######  ####  #",
+		"#     #  #  #     #     #     #",
+		"#  #  #  #############  #  #  #",
+		"#  #     #                 #   ",
+		"############################   "
+		];
+		var randomNumber=Math.floor(Math.random()*8);
+		var game= {
+			boardToDraw: [],
+			isEmpty: function(location){
+				return game.boardToDraw[location.y][location.x]==' ';
+			}
+		};
+		if (randomNumber==0){
+			game.boardToDraw=board0;
+		}
+		else if (randomNumber==1){
+			game.boardToDraw=board1;
+		}
+		else if (randomNumber==2){
+			game.boardToDraw=board2;
+		}
+		else if (randomNumber==3){
+			game.boardToDraw=board3;
+		}
+		else if (randomNumber==4){
+			game.boardToDraw=board4;
+		}
+		else if (randomNumber==5){
+			game.boardToDraw=board5;
+		}
+		else if (randomNumber==6){
+			game.boardToDraw=board6;
+		}
+		else if (randomNumber==7){
+			game.boardToDraw=board7;
+		}
+		var player={
+			tile: [{x: 1, y: 1}],
+			facing: "E",
+			won:false,
+			nextLocation: function(){
+				var targetX=player.tile[0].x;
+				var targetY=player.tile[0].y;
+				targetY= player.facing == "N" ? targetY-1:targetY;
+				targetY= player.facing == "S" ? targetY+1:targetY;
+				targetX= player.facing == "W" ? targetX-1:targetX;
+				targetX= player.facing == "E" ? targetX+1:targetX;
+				return {x: targetX, y: targetY};
+			},
+			move: function(){
+				var location=player.nextLocation();
+				if(game.isEmpty(location)){
+					player.tile.unshift(location);
+					player.tile.pop();
 				}
-			currentXoffset+=squareSize;
-			});
-			currentYoffset+=squareSize;
-		});
+				if(location.y >= 29 && location.x >= 29){
+					player.won=true;
+				}
+			}
+		};
+		var graphics={
+		    canvas: document.getElementById("canvas"),
+			squareSize: 20,
+			drawBoard: function(ctx){
+				var currentYoffset=0;
+				game.boardToDraw.forEach(function checkLine(line){
+					line=line.split("");
+					var currentXoffset=0;
+					line.forEach(function checkCharacter(character){
+						if(character=="#"){
+							ctx.fillStyle="black";
+							ctx.fillRect(currentXoffset,currentYoffset,graphics.squareSize,graphics.squareSize);
+						}
+					currentXoffset+=graphics.squareSize;
+					});
+					currentYoffset+=graphics.squareSize;
+				});
+			},
+			drawPlayer: function(ctx) {
+				var partXlocation = player.tile[0].x*graphics.squareSize;
+				var partYlocation = player.tile[0].y*graphics.squareSize;
+				ctx.fillStyle="red";
+				ctx.fillRect(partXlocation+2,partYlocation+2,graphics.squareSize-4,graphics.squareSize-4);
+			},
+			drawMazeEnd: function(ctx){
+				ctx.fillStyle="yellow";
+				ctx.fillRect(29*graphics.squareSize,29*graphics.squareSize,graphics.squareSize*2,graphics.squareSize*2);
+				ctx.fillStyle="black"
+				ctx.fillRect(29*graphics.squareSize+graphics.squareSize/3,29*graphics.squareSize+graphics.squareSize/3,graphics.squareSize/3,graphics.squareSize/3);
+				ctx.fillRect(30*graphics.squareSize+graphics.squareSize/3,29*graphics.squareSize+graphics.squareSize/3,graphics.squareSize/3,graphics.squareSize/3);
+				ctx.fillRect(29*graphics.squareSize+graphics.squareSize/3,30*graphics.squareSize+graphics.squareSize/3,graphics.squareSize/3*4,graphics.squareSize/3);
+			},
+			drawGame: function(){
+				var ctx = graphics.canvas.getContext("2d");
+				ctx.clearRect(0,0,graphics.canvas.width,graphics.canvas.height);
+				graphics.drawBoard(ctx);
+				graphics.drawMazeEnd(ctx);
+				graphics.drawPlayer(ctx);
+				
+			}
+		};
+		var gameControl={
+			processInput: function(keyPressed){
+				var key=keyPressed.key.toLowerCase();
+				var targetDirection=player.facing
+				if(key=="w"){
+					targetDirection="N"
+				};
+				if(key=="a"){
+					targetDirection="W"
+				};
+				if(key=="s"){
+					targetDirection="S"
+				};
+				if(key=="d"){
+					targetDirection="E"
+				};
+				player.facing=targetDirection;
+				player.move();
+				graphics.drawGame();
+				if(player.won){
+					document.getElementById("winner").innerText="You won the maze! Refresh the page for a new maze."
+				}				
+			},
+			startGame:function(){
+				window.addEventListener("keypress",gameControl.processInput,false);
+				graphics.drawGame();
+			}
+		};
+		gameControl.startGame();
 	</script>
 </body>
 </html>
