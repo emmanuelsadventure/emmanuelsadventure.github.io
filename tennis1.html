@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Table Tennis
+		</title>
+	</head>
+	<body>
+		<a href="index.html" style="font-size:18pt;padding:0px;color:black;">Home</a><br/>
+		<canvas id="canvas" width="960" height="540" style="display:block;margin:auto;padding-top:100px"></canvas>
+		<script>
+			const canvasHeight=540;
+			const canvasWidth=960;
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			function paddle(x, y, width, height){
+				this.x=x;
+				this.y=y;
+				this.width=width;
+				this.height=height;
+				this.speedModifier=0;
+				this.hasCollidedWith=function(ball){
+					var paddleLeftWall=this.x;
+					var paddleRightWall=this.x+this.width;
+					var paddleTopWall=this.y;
+					var paddleBottomWall=this.y+this.height;
+					if(ball.x>paddleLeftWall 
+					&& ball.x<paddleRightWall
+					&& ball.y>paddleTopWall
+					&& ball.y<paddleBottomWall){
+						return true;
+					}
+					return false;
+				};
+				this.move=function(keyCode){
+					var nextY=this.y;
+					if(keyCode==40){
+						nextY+=10;
+						this.speedModifier=Math.random()+1.5;
+					}
+					else if(keyCode==38){
+						nextY-=10;
+						this.speedModifier=Math.random()+1.5;
+					}
+					else{
+						this.speedModifier=0;
+					}
+					nextY = nextY < 0 ? 0 : nextY;
+					nextY = nextY + this.height > canvasHeight ? canvasHeight - this.height : nextY;
+					this.y=nextY;
+				};
+			}
+			var player=new paddle(5,200,25,100);
+			var ai=new paddle(930,200,25,100);
+			var ball={x:canvasWidth/2,y:canvasHeight/2,radius:7,xSpeed:4,ySpeed:0,
+					reverseX:function(){
+						this.xSpeed*=-1;
+					},
+					reverseY:function(){
+						this.ySpeed*=-1;
+					},
+					reset: function(){
+						this.x=canvasWidth/2;
+						this.y=canvasHeight/2;
+						this.xSpeed=4;
+						this.ySpeed=0;
+					},
+					isBouncing: function(){
+						return ball.ySpeed !=0;
+					},
+					modifyXSpeedBy: function(modification){
+						if(this.xSpeed<0){
+							modification *= -1;
+						}
+						var nextValue= this.xSpeed+modification;
+						if(nextValue>9){
+							nextValue=9;
+						}
+						if(nextValue<-9){
+							nextValue=-9;
+						}
+						this.xSpeed = nextValue;
+					},
+					modifyYSpeedBy: function(modification){
+						if(this.ySpeed<0){
+							modification *= -1;
+						}
+						this.ySpeed +=modification;
+					}
+				};
+			function tick(){
+				updateGame();
+				draw();
+				window.setTimeout("tick()",1000/60);
+			}
+			function updateGame(){
+				ball.x += ball.xSpeed;
+				ball.y += ball.ySpeed;
+				if(ball.x < 0 || ball.x > canvasWidth){
+					ball.reset();
+				}
+				if(ball.y<=0||ball.y>=canvasHeight){
+					ball.reverseY();
+				}
+				var collidedWithPlayer=player.hasCollidedWith(ball);
+				var collidedWithAi=ai.hasCollidedWith(ball);
+				if(collidedWithPlayer || collidedWithAi){
+					ball.reverseX();
+					ball.modifyXSpeedBy(0.25);
+					var speedUpValue=collidedWithPlayer?player.speedModifier:ai.speedModifier;
+					ball.modifyYSpeedBy(speedUpValue);
+				}
+				for(var keyCode in heldDown){
+					player.move(keyCode);
+				}
+				var aiMiddle = ai.y + (ai.height / 2);
+				if(aiMiddle < ball.y){
+					ai.move(40);
+				}
+				if(aiMiddle > ball.y){
+					ai.move(38);
+				}
+			}
+			function draw(){
+				ctx.fillStyle = "black";
+				ctx.fillRect(0,0,canvasWidth,canvasHeight);
+				renderPaddle(player);
+				renderPaddle(ai);
+				renderBall(ball);
+			}
+			function renderPaddle(paddle){
+				ctx.fillStyle="orange";
+				ctx.fillRect(paddle.x,paddle.y,paddle.width,paddle.height);
+			}
+			function renderBall(ball) {
+				ctx.beginPath();
+				ctx.arc(ball.x,ball.y,ball.radius,0, 2*Math.PI,false);
+				ctx.fillStyle="orange";
+				ctx.fill();
+			}
+			var heldDown={};
+			window.addEventListener("keydown",function(keyInfo) {heldDown[event.keyCode]=true;},false);
+			window.addEventListener("keyup",function(keyInfo) {delete heldDown[event.keyCode];},false);
+			tick();
+		</script>
+	</body>
+</html>
