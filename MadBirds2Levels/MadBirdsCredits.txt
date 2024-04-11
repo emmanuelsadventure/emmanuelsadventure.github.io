@@ -1,0 +1,7 @@
+	Credits:
+1. Bird, Author: bevouliin.com, Source: https://opengameart.org/content/fat-bird-sprite-sheets-for-gamedev
+2. Background, Author: bevouliin.com, Source: https://opengameart.org/content/bevouliin-free-mountain-game-background
+3. Crate, Author: PolygonixGames, Source: https://opengameart.org/content/pixel-wooden-crate
+4. Monster, Author: bevouliin.com, Source: https://opengameart.org/content/blue-land-monster-sprites
+5. Cloud, Author: bevouliin.com, Source: https://opengameart.org/content/cute-clouds-game-ornament
+6. Boom Sound Effects, Author: dklon, Source: https://opengameart.org/content/boom-pack-1
