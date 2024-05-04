@@ -1,0 +1,6 @@
+Tutorial: https://www.youtube.com/watch?v=XtQMytORBmM
+Asset credits:
+1. Bird, Author: bevouliin.com, Source: https://opengameart.org/content/flappy-monster-sprite-sheets
+2. Pipe, Author: bhu1c, Source: https://opengameart.org/content/pipe
+3. Cloud, Author: bevouliin.com, Source: https://opengameart.org/content/cute-clouds-game-ornament
+4. Ding Sound, Author: wobbleboxx, Source: https://opengameart.org/content/level-up-power-up-coin-get-13-sounds
